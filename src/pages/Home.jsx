@@ -47,27 +47,36 @@ export const Home = () => {
         : JSON.stringify(results)}
 
       {results.data && (
-        <table style={{ textAlign: "left" }}>
-          <thead>
-            <tr>
-              <th className="clickable">Movie name</th>
-              <th className="clickable">Year</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.data.map((movie) => (
-              <tr key={movie.Title}>
-                <td>{movie.Title}</td>
-                <td>{movie.Year}</td>
+        <>
+          <table style={{ textAlign: "left" }}>
+            <thead>
+              <tr>
+                <th className="clickable">Movie name</th>
+                <th className="clickable">Year</th>
               </tr>
+            </thead>
+            <tbody>
+              {results.data.map((movie) => (
+                <tr key={movie.imdbID}>
+                  <td>{movie.Title}</td>
+                  <td>{movie.Year}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+            {[...Array(results.total_pages)].map((value, index) => (
+              <Button
+                key={index + 1}
+                onClick={() => {
+                  alert(index + 1);
+                }}
+              >
+                {index + 1}
+              </Button>
             ))}
-          </tbody>
-          <tfoot>
-            <Button>1</Button>
-            <Button>2</Button>
-            <Button>3</Button>
-          </tfoot>
-        </table>
+          </div>
+        </>
       )}
     </div>
   );
