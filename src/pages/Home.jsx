@@ -27,6 +27,18 @@ export const Home = () => {
     }
   }
 
+  async function getMoviesByPage(page) {
+    setIsLoading(true);
+    const response = await getMoviesByName(inputValue, page);
+    if (response.data) {
+      setResults(response.data);
+    } else {
+      setErrorMessage(response.error);
+    }
+
+    setIsLoading(false);
+  }
+
   return (
     <div>
       <h1>Movies search</h1>
@@ -69,7 +81,7 @@ export const Home = () => {
               <Button
                 key={index + 1}
                 onClick={() => {
-                  alert(index + 1);
+                  getMoviesByPage(index + 1);
                 }}
               >
                 {index + 1}
