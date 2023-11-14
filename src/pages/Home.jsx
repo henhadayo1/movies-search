@@ -20,6 +20,13 @@ export const Home = () => {
 
     setIsLoading(false);
   }
+
+  function keyDownEventHandler(event) {
+    if (event.key === "Enter") {
+      searchMovies();
+    }
+  }
+
   return (
     <div>
       <h1>Movies search</h1>
@@ -28,6 +35,7 @@ export const Home = () => {
         <Input
           placeholder="Type movie name..."
           onChange={(event) => setInputValue(event.target.value)}
+          onKeyDown={keyDownEventHandler}
         ></Input>
         <Button onClick={searchMovies}>Search</Button>
       </div>
