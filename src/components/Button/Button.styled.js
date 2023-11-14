@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const StyledButton = styled.button`
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  padding: 0.8em 1.4em;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 400;
   font-family: inherit;
   background-color: #4472c4;
   color: white;

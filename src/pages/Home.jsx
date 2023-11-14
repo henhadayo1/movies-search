@@ -4,7 +4,7 @@ import { useState } from "react";
 import { getMoviesByName } from "../services/movies-service";
 
 export const Home = () => {
-  const [result, setResult] = useState({});
+  const [results, setResults] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -13,7 +13,7 @@ export const Home = () => {
     setIsLoading(true);
     const response = await getMoviesByName(inputValue);
     if (response.data) {
-      setResult(response.data);
+      setResults(response.data);
     } else {
       setErrorMessage(response.error);
     }
@@ -36,7 +36,31 @@ export const Home = () => {
         ? "Fetching results..."
         : errorMessage
         ? errorMessage
-        : JSON.stringify(result)}
+        : JSON.stringify(results)}
+
+      {results.data && (
+        <table style={{ textAlign: "left" }}>
+          <thead>
+            <tr>
+              <th className="clickable">Movie name</th>
+              <th className="clickable">Year</th>
+            </tr>
+          </thead>
+          <tbody>
+            {results.data.map((movie) => (
+              <tr key={movie.Title}>
+                <td>{movie.Title}</td>
+                <td>{movie.Year}</td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <Button>1</Button>
+            <Button>2</Button>
+            <Button>3</Button>
+          </tfoot>
+        </table>
+      )}
     </div>
   );
 };
