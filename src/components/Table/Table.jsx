@@ -6,7 +6,7 @@ export const Table = ({
   data,
   columns,
   keyProp,
-  numberOfPages,
+  totalPages,
   currentPage,
   onPageClick,
 }) => {
@@ -33,7 +33,7 @@ export const Table = ({
         </tbody>
       </StyledTable>
       <Pagination
-        numberOfPages={numberOfPages}
+        totalPages={totalPages}
         onClick={onPageClick}
         page={currentPage}
       />

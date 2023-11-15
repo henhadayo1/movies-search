@@ -88,7 +88,7 @@ export const Home = () => {
             data={results.data}
             columns={COLUMNS}
             keyProp="imdbID"
-            numberOfPages={results.total_pages}
+            totalPages={results.total_pages}
             currentPage={currentPage}
             onPageClick={pageClickEventHandler}
           />

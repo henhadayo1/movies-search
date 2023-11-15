@@ -1,9 +1,21 @@
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import { StyledPagination } from "./Pagination.styled";
+import { arrayFromNumber } from "../utils/utils";
 
-export const Pagination = ({ numberOfPages, onClick, page }) => {
+const PAGINATION_LIMIT = 10;
+
+export const Pagination = ({ totalPages, onClick, page }) => {
   const [currentPage, setCurrentPage] = useState(page);
+  const [pagination, setPagination] = useState([]);
+
+  useEffect(() => {
+    if (totalPages > PAGINATION_LIMIT) {
+      setPagination(arrayFromNumber(PAGINATION_LIMIT));
+    } else {
+      setPagination(arrayFromNumber(totalPages));
+    }
+  }, [totalPages]);
 
   useEffect(() => {
     setCurrentPage(page);
@@ -17,22 +29,45 @@ export const Pagination = ({ numberOfPages, onClick, page }) => {
     onClick(page);
   }
 
+  function changeEventHandler(event) {
+    const page = Number(event.target.value);
+    if (page === currentPage) {
+      return;
+    }
+    setCurrentPage(page);
+    onClick(page);
+  }
+
   return (
     <>
       <StyledPagination>
-        {[...Array(numberOfPages)].map((value, index) => (
+        {pagination.map((pageNo) => (
           <Button
-            key={index + 1}
+            key={pageNo}
             onClick={() => {
-              clickEventHandler(index + 1);
+              clickEventHandler(pageNo);
             }}
-            style={{ backgroundColor: currentPage === index + 1 && "black" }}
+            style={{ backgroundColor: currentPage === pageNo && "black" }}
           >
-            {index + 1}
+            {pageNo}
           </Button>
         ))}
+
+        <label htmlFor="jumpToPage">Jump to page:</label>
+        <select
+          name="pagination"
+          id="jumpToPage"
+          onChange={changeEventHandler}
+          value={currentPage}
+        >
+          {arrayFromNumber(totalPages).map((page) => (
+            <option key={page} value={page}>
+              {page}
+            </option>
+          ))}
+        </select>
       </StyledPagination>
-      {numberOfPages} Total pages
+      {totalPages} Total pages
     </>
   );
 };
