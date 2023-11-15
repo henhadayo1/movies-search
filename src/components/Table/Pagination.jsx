@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import { StyledPagination } from "./Pagination.styled";
 
-export const Pagination = ({ numberOfPages, onClick }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+export const Pagination = ({ numberOfPages, onClick, page }) => {
+  const [currentPage, setCurrentPage] = useState(page);
+
+  useEffect(() => {
+    setCurrentPage(page);
+  }, [page]);
 
   function clickEventHandler(page) {
     if (page === currentPage) {

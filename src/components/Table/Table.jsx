@@ -7,6 +7,7 @@ export const Table = ({
   columns,
   keyProp,
   numberOfPages,
+  currentPage,
   onPageClick,
 }) => {
   return (
@@ -31,7 +32,11 @@ export const Table = ({
           ))}
         </tbody>
       </StyledTable>
-      <Pagination numberOfPages={numberOfPages} onClick={onPageClick} />
+      <Pagination
+        numberOfPages={numberOfPages}
+        onClick={onPageClick}
+        page={currentPage}
+      />
     </StyleTableWrapper>
   );
 };

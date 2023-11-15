@@ -16,9 +16,9 @@ export const Home = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [prevInputValue, setPrevInputValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   async function searchMovies() {
-    console.log(inputValue, prevInputValue);
     if (inputValue === "" || prevInputValue === inputValue) {
       return;
     }
@@ -31,6 +31,7 @@ export const Home = () => {
     }
 
     setIsLoading(false);
+    setCurrentPage(1);
   }
 
   async function getMoviesByPage(page) {
@@ -43,6 +44,7 @@ export const Home = () => {
     }
 
     setIsLoading(false);
+    setCurrentPage(page);
   }
 
   async function keyDownEventHandler(event) {
@@ -87,6 +89,7 @@ export const Home = () => {
             columns={COLUMNS}
             keyProp="imdbID"
             numberOfPages={results.total_pages}
+            currentPage={currentPage}
             onPageClick={pageClickEventHandler}
           />
         </>
