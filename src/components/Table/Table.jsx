@@ -1,5 +1,6 @@
 import Pagination from "./Pagination";
 import { StyledTable } from "./Table.styled";
+import { StyleTableWrapper } from "./TableWrapper.styled";
 
 export const Table = ({
   data,
@@ -9,7 +10,7 @@ export const Table = ({
   onPageClick,
 }) => {
   return (
-    <>
+    <StyleTableWrapper>
       <StyledTable>
         <thead>
           <tr>
@@ -31,7 +32,7 @@ export const Table = ({
         </tbody>
       </StyledTable>
       <Pagination numberOfPages={numberOfPages} onClick={onPageClick} />
-    </>
+    </StyleTableWrapper>
   );
 };
 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledTable = styled.table`
   text-align: left;
   border-collapse: collapse;
-  margin: 1em;
+  width: 100%;
   & > thead > tr {
     background-color: #a5a5a5;
     & > th {
