@@ -21,7 +21,7 @@ export const Pagination = ({ totalPages, onClick, page }) => {
     setCurrentPage(page);
   }, [page]);
 
-  function clickEventHandler(page) {
+  function paginate(page) {
     if (page === currentPage) {
       return;
     }
@@ -29,13 +29,12 @@ export const Pagination = ({ totalPages, onClick, page }) => {
     onClick(page);
   }
 
+  function clickEventHandler(page) {
+    paginate(page);
+  }
+
   function changeEventHandler(event) {
-    const page = Number(event.target.value);
-    if (page === currentPage) {
-      return;
-    }
-    setCurrentPage(page);
-    onClick(page);
+    paginate(Number(event.target.value));
   }
 
   return (
