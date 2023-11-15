@@ -16,7 +16,6 @@ export const Home = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [prevInputValue, setPrevInputValue] = useState("");
-  const [prevPage, setPrevPage] = useState(1);
 
   async function searchMovies() {
     console.log(inputValue, prevInputValue);
@@ -35,9 +34,6 @@ export const Home = () => {
   }
 
   async function getMoviesByPage(page) {
-    if (page === prevPage) {
-      return;
-    }
     setIsLoading(true);
     const response = await getMoviesByName(inputValue, page);
     if (response.data) {
@@ -63,7 +59,6 @@ export const Home = () => {
 
   async function pageClickEventHandler(page) {
     await getMoviesByPage(page);
-    setPrevPage(page);
   }
 
   return (

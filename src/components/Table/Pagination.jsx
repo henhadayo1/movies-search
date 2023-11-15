@@ -1,7 +1,18 @@
+import { useState } from "react";
 import Button from "../Button/Button";
 import { StyledPagination } from "./Pagination.styled";
 
 export const Pagination = ({ numberOfPages, onClick }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  function clickEventHandler(page) {
+    if (page === currentPage) {
+      return;
+    }
+    setCurrentPage(page);
+    onClick(page);
+  }
+
   return (
     <>
       <StyledPagination>
@@ -9,8 +20,9 @@ export const Pagination = ({ numberOfPages, onClick }) => {
           <Button
             key={index + 1}
             onClick={() => {
-              onClick(index + 1);
+              clickEventHandler(index + 1);
             }}
+            style={{ backgroundColor: currentPage === index + 1 && "black" }}
           >
             {index + 1}
           </Button>
