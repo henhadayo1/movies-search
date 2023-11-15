@@ -2,6 +2,13 @@ import Input from "../components/Input/Input";
 import Button from "../components/Button/Button";
 import { useState } from "react";
 import { getMoviesByName } from "../services/movies-service";
+import Table from "../components/Table/Table";
+
+// Movies table's columns
+const COLUMNS = [
+  { name: "Title", title: "Movie name" },
+  { name: "Year", title: "Year" },
+];
 
 export const Home = () => {
   const [results, setResults] = useState({});
@@ -60,22 +67,7 @@ export const Home = () => {
 
       {results.data && (
         <>
-          <table style={{ textAlign: "left" }}>
-            <thead>
-              <tr>
-                <th className="clickable">Movie name</th>
-                <th className="clickable">Year</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results.data.map((movie) => (
-                <tr key={movie.imdbID}>
-                  <td>{movie.Title}</td>
-                  <td>{movie.Year}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Table data={results.data} columns={COLUMNS}></Table>
           <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
             {[...Array(results.total_pages)].map((value, index) => (
               <Button
