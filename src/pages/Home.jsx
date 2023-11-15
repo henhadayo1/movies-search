@@ -3,7 +3,6 @@ import Button from "../components/Button/Button";
 import { useState } from "react";
 import { getMoviesByName } from "../services/movies-service";
 import Table from "../components/Table/Table";
-import { Pagination } from "../components/Table/Pagination";
 
 // Movies table's columns
 const COLUMNS = [
@@ -16,8 +15,13 @@ export const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const [prevInputValue, setPrevInputValue] = useState("");
 
   async function searchMovies() {
+    console.log(inputValue, prevInputValue);
+    if (inputValue === "" || prevInputValue === inputValue) {
+      return;
+    }
     setIsLoading(true);
     const response = await getMoviesByName(inputValue);
     if (response.data) {
@@ -29,10 +33,16 @@ export const Home = () => {
     setIsLoading(false);
   }
 
-  function keyDownEventHandler(event) {
+  async function keyDownEventHandler(event) {
     if (event.key === "Enter") {
-      searchMovies();
+      await searchMovies();
+      setPrevInputValue(inputValue);
     }
+  }
+
+  async function clickEventHandler() {
+    await searchMovies();
+    setPrevInputValue(inputValue);
   }
 
   async function getMoviesByPage(page) {
@@ -57,7 +67,7 @@ export const Home = () => {
           onChange={(event) => setInputValue(event.target.value)}
           onKeyDown={keyDownEventHandler}
         ></Input>
-        <Button onClick={searchMovies}>Search</Button>
+        <Button onClick={clickEventHandler}>Search</Button>
       </div>
       <h2>Results</h2>
       {isLoading
