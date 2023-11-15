@@ -68,10 +68,11 @@ export const Home = () => {
 
       {results.data && (
         <>
-          <Table data={results.data} columns={COLUMNS} />
-          <Pagination
+          <Table
+            data={results.data}
+            columns={COLUMNS}
             numberOfPages={results.total_pages}
-            onClick={getMoviesByPage}
+            onPageClick={getMoviesByPage}
           />
         </>
       )}
