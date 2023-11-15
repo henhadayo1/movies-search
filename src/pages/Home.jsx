@@ -16,6 +16,7 @@ export const Home = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [prevInputValue, setPrevInputValue] = useState("");
+  const [prevPage, setPrevPage] = useState(1);
 
   async function searchMovies() {
     console.log(inputValue, prevInputValue);
@@ -24,6 +25,21 @@ export const Home = () => {
     }
     setIsLoading(true);
     const response = await getMoviesByName(inputValue);
+    if (response.data) {
+      setResults(response.data);
+    } else {
+      setErrorMessage(response.error);
+    }
+
+    setIsLoading(false);
+  }
+
+  async function getMoviesByPage(page) {
+    if (page === prevPage) {
+      return;
+    }
+    setIsLoading(true);
+    const response = await getMoviesByName(inputValue, page);
     if (response.data) {
       setResults(response.data);
     } else {
@@ -45,16 +61,9 @@ export const Home = () => {
     setPrevInputValue(inputValue);
   }
 
-  async function getMoviesByPage(page) {
-    setIsLoading(true);
-    const response = await getMoviesByName(inputValue, page);
-    if (response.data) {
-      setResults(response.data);
-    } else {
-      setErrorMessage(response.error);
-    }
-
-    setIsLoading(false);
+  async function pageClickEventHandler(page) {
+    await getMoviesByPage(page);
+    setPrevPage(page);
   }
 
   return (
@@ -83,7 +92,7 @@ export const Home = () => {
             columns={COLUMNS}
             keyProp="imdbID"
             numberOfPages={results.total_pages}
-            onPageClick={getMoviesByPage}
+            onPageClick={pageClickEventHandler}
           />
         </>
       )}
