@@ -71,6 +71,7 @@ export const Home = () => {
           <Table
             data={results.data}
             columns={COLUMNS}
+            keyProp="imdbID"
             numberOfPages={results.total_pages}
             onPageClick={getMoviesByPage}
           />
