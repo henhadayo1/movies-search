@@ -3,6 +3,7 @@ import Button from "../components/Button/Button";
 import { useState } from "react";
 import { getMoviesByName } from "../services/movies-service";
 import Table from "../components/Table/Table";
+import { Pagination } from "../components/Table/Pagination";
 
 // Movies table's columns
 const COLUMNS = [
@@ -67,19 +68,11 @@ export const Home = () => {
 
       {results.data && (
         <>
-          <Table data={results.data} columns={COLUMNS}></Table>
-          <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
-            {[...Array(results.total_pages)].map((value, index) => (
-              <Button
-                key={index + 1}
-                onClick={() => {
-                  getMoviesByPage(index + 1);
-                }}
-              >
-                {index + 1}
-              </Button>
-            ))}
-          </div>
+          <Table data={results.data} columns={COLUMNS} />
+          <Pagination
+            numberOfPages={results.total_pages}
+            onClick={getMoviesByPage}
+          />
         </>
       )}
     </div>
