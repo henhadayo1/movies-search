@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { SORTING_ORDER } from "../utils/utils";
 
 export const SortingIcon = ({ sortingOrder }) => {
@@ -11,3 +12,8 @@ export const SortingIcon = ({ sortingOrder }) => {
 };
 
 export default SortingIcon;
+
+SortingIcon.propTypes = {
+  sortingOrder: PropTypes.oneOf([SORTING_ORDER.ASC, SORTING_ORDER.DESC])
+    .isRequired,
+};

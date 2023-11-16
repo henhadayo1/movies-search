@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import { StyledPagination } from "./Pagination.styled";
@@ -72,3 +73,9 @@ export const Pagination = ({ totalPages, onClick, page }) => {
 };
 
 export default Pagination;
+
+Pagination.propTypes = {
+  totalPages: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  page: PropTypes.number,
+};

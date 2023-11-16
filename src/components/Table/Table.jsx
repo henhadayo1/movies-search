@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
 import { StyledTable } from "./Table.styled";
@@ -46,10 +47,7 @@ export const Table = ({
               >
                 {column.title}
                 {columnToSort === column.name && (
-                  <SortingIcon
-                    columnName={column.name}
-                    sortingOrder={sortingOrder}
-                  />
+                  <SortingIcon sortingOrder={sortingOrder} />
                 )}
               </th>
             ))}
@@ -75,3 +73,12 @@ export const Table = ({
 };
 
 export default Table;
+
+Table.propTypes = {
+  data: PropTypes.array.isRequired,
+  columns: PropTypes.array.isRequired,
+  keyProp: PropTypes.string,
+  totalPages: PropTypes.number.isRequired,
+  currentPage: PropTypes.number,
+  onPageClick: PropTypes.func,
+};
