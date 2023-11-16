@@ -75,7 +75,6 @@ export const Home = () => {
         ></Input>
         <Button onClick={clickEventHandler}>Search</Button>
       </div>
-      <h2>Results</h2>
       {isLoading && "Searching movies..."}
       {errorMessage && errorMessage}
       {results.data && (
