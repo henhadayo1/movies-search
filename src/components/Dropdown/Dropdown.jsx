@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
+import { StyledDropdown } from "./Dropdown.styled";
 
 export const Dropdown = ({ items, value, title, id, name, onChange }) => {
   return (
-    <>
+    <StyledDropdown>
       <label htmlFor={id}>{title}:</label>
       <select name={name} id={id} onChange={onChange} value={value}>
         {items.map((item) => (
@@ -11,7 +12,7 @@ export const Dropdown = ({ items, value, title, id, name, onChange }) => {
           </option>
         ))}
       </select>
-    </>
+    </StyledDropdown>
   );
 };
 

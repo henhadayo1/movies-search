@@ -56,7 +56,7 @@ export const Pagination = ({ totalPages, onClick, page }) => {
         <Dropdown
           items={arrayFromNumber(totalPages)}
           value={currentPage}
-          title="Jump to page:"
+          title="Jump to page"
           id="jumpToPage"
           name="pagination"
           onChange={changeEventHandler}
