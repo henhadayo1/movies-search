@@ -77,7 +77,7 @@ export default Table;
 Table.propTypes = {
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
-  keyProp: PropTypes.string,
+  keyProp: PropTypes.string.isRequired,
   totalPages: PropTypes.number.isRequired,
   currentPage: PropTypes.number,
   onPageClick: PropTypes.func,
