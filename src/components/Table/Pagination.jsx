@@ -4,20 +4,25 @@ import Button from "../Button/Button";
 import { StyledPagination } from "./Pagination.styled";
 import { arrayFromNumber } from "../utils/utils";
 import Dropdown from "../Dropdown/Dropdown";
+import useMobile from "../../hooks/useMobile";
 
 const PAGINATION_LIMIT = 10;
+const PAGINATION_LIMIT_MOBILE = 3;
 
 export const Pagination = ({ totalPages, onClick, page }) => {
   const [currentPage, setCurrentPage] = useState(page);
   const [pagination, setPagination] = useState([]);
+  const isMobile = useMobile();
 
   useEffect(() => {
-    if (totalPages > PAGINATION_LIMIT) {
+    if (isMobile && totalPages > PAGINATION_LIMIT_MOBILE) {
+      setPagination(arrayFromNumber(PAGINATION_LIMIT_MOBILE));
+    } else if (totalPages > PAGINATION_LIMIT) {
       setPagination(arrayFromNumber(PAGINATION_LIMIT));
     } else {
       setPagination(arrayFromNumber(totalPages));
     }
-  }, [totalPages]);
+  }, [totalPages, isMobile]);
 
   useEffect(() => {
     setCurrentPage(page);
@@ -73,4 +78,5 @@ Pagination.propTypes = {
   totalPages: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   page: PropTypes.number,
+  isMobile: PropTypes.bool,
 };

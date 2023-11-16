@@ -5,4 +5,6 @@ export const StyledPagination = styled.div`
   flex-direction: row;
   gap: 1rem;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 `;
