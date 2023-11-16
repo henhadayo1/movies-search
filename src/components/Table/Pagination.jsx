@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import { StyledPagination } from "./Pagination.styled";
 import { arrayFromNumber } from "../utils/utils";
+import Dropdown from "../Dropdown/Dropdown";
 
 const PAGINATION_LIMIT = 10;
 
@@ -52,20 +53,14 @@ export const Pagination = ({ totalPages, onClick, page }) => {
             {pageNo}
           </Button>
         ))}
-
-        <label htmlFor="jumpToPage">Jump to page:</label>
-        <select
-          name="pagination"
-          id="jumpToPage"
-          onChange={changeEventHandler}
+        <Dropdown
+          items={arrayFromNumber(totalPages)}
           value={currentPage}
-        >
-          {arrayFromNumber(totalPages).map((page) => (
-            <option key={page} value={page}>
-              {page}
-            </option>
-          ))}
-        </select>
+          title="Jump to page:"
+          id="jumpToPage"
+          name="pagination"
+          onChange={changeEventHandler}
+        />
       </StyledPagination>
       {totalPages} Total pages
     </>
