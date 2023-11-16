@@ -76,12 +76,8 @@ export const Home = () => {
         <Button onClick={clickEventHandler}>Search</Button>
       </div>
       <h2>Results</h2>
-      {isLoading
-        ? "Fetching results..."
-        : errorMessage
-        ? errorMessage
-        : JSON.stringify(results)}
-
+      {isLoading && "Searching movies..."}
+      {errorMessage && errorMessage}
       {results.data && (
         <>
           <Table
