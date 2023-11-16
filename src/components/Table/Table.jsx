@@ -3,6 +3,7 @@ import Pagination from "./Pagination";
 import { StyledTable } from "./Table.styled";
 import { StyleTableWrapper } from "./TableWrapper.styled";
 import { SORTING_ORDER, sortArrayOfObjectsByKey } from "../utils/utils";
+import SortingIcon from "./SortingIcon";
 
 export const Table = ({
   data,
@@ -44,6 +45,12 @@ export const Table = ({
                 onClick={() => headClickEventHandler(column.name)}
               >
                 {column.title}
+                {columnToSort === column.name && (
+                  <SortingIcon
+                    columnName={column.name}
+                    sortingOrder={sortingOrder}
+                  />
+                )}
               </th>
             ))}
           </tr>
